@@ -1,0 +1,438 @@
+NO .
+
+ 0  *ast.BlockStmt {
+ 1  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:13:13
+ 2  .  List: []ast.Stmt (len = 3) {
+ 3  .  .  0: *ast.AssignStmt {
+ 4  .  .  .  Lhs: []ast.Expr (len = 1) {
+ 5  .  .  .  .  0: *ast.Ident {
+ 6  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:2
+ 7  .  .  .  .  .  Name: "globalData"
+ 8  .  .  .  .  .  Obj: *ast.Object {
+ 9  .  .  .  .  .  .  Kind: var
+10  .  .  .  .  .  .  Name: "globalData"
+11  .  .  .  .  .  .  Decl: *ast.ValueSpec {
+12  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+13  .  .  .  .  .  .  .  .  0: *ast.Ident {
+14  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:5
+15  .  .  .  .  .  .  .  .  .  Name: "globalData"
+16  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 8)
+17  .  .  .  .  .  .  .  .  }
+18  .  .  .  .  .  .  .  }
+19  .  .  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+20  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+21  .  .  .  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:18
+22  .  .  .  .  .  .  .  .  .  Kind: STRING
+23  .  .  .  .  .  .  .  .  .  Value: "\"some data\""
+24  .  .  .  .  .  .  .  .  }
+25  .  .  .  .  .  .  .  }
+26  .  .  .  .  .  .  }
+27  .  .  .  .  .  .  Data: 0
+28  .  .  .  .  .  }
+29  .  .  .  .  }
+30  .  .  .  }
+31  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:13
+32  .  .  .  Tok: =
+33  .  .  .  Rhs: []ast.Expr (len = 1) {
+34  .  .  .  .  0: *ast.SelectorExpr {
+35  .  .  .  .  .  X: *ast.Ident {
+36  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:15
+37  .  .  .  .  .  .  Name: "pkg1"
+38  .  .  .  .  .  }
+39  .  .  .  .  .  Sel: *ast.Ident {
+40  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:20
+41  .  .  .  .  .  .  Name: "GlobalData"
+42  .  .  .  .  .  }
+43  .  .  .  .  }
+44  .  .  .  }
+45  .  .  }
+46  .  .  1: *ast.IncDecStmt {
+47  .  .  .  X: *ast.SelectorExpr {
+48  .  .  .  .  X: *ast.Ident {
+49  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:17:2
+50  .  .  .  .  .  Name: "pkg1"
+51  .  .  .  .  }
+52  .  .  .  .  Sel: *ast.Ident {
+53  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:17:7
+54  .  .  .  .  .  Name: "GlobalDataInt"
+55  .  .  .  .  }
+56  .  .  .  }
+57  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:17:20
+58  .  .  .  Tok: ++
+59  .  .  }
+60  .  .  2: *ast.IfStmt {
+61  .  .  .  If: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:2
+62  .  .  .  Cond: *ast.BinaryExpr {
+63  .  .  .  .  X: *ast.SelectorExpr {
+64  .  .  .  .  .  X: *ast.Ident {
+65  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:5
+66  .  .  .  .  .  .  Name: "pkg1"
+67  .  .  .  .  .  }
+68  .  .  .  .  .  Sel: *ast.Ident {
+69  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:10
+70  .  .  .  .  .  .  Name: "GlobalDataInt"
+71  .  .  .  .  .  }
+72  .  .  .  .  }
+73  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:24
+74  .  .  .  .  Op: >
+75  .  .  .  .  Y: *ast.BasicLit {
+76  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:26
+77  .  .  .  .  .  Kind: INT
+78  .  .  .  .  .  Value: "0"
+79  .  .  .  .  }
+80  .  .  .  }
+81  .  .  .  Body: *ast.BlockStmt {
+82  .  .  .  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:28
+83  .  .  .  .  List: []ast.Stmt (len = 1) {
+84  .  .  .  .  .  0: *ast.ExprStmt {
+85  .  .  .  .  .  .  X: *ast.CallExpr {
+86  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+87  .  .  .  .  .  .  .  .  X: *ast.Ident {
+88  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:3
+89  .  .  .  .  .  .  .  .  .  Name: "pkg1"
+90  .  .  .  .  .  .  .  .  }
+91  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+92  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:8
+93  .  .  .  .  .  .  .  .  .  Name: "Foo"
+94  .  .  .  .  .  .  .  .  }
+95  .  .  .  .  .  .  .  }
+96  .  .  .  .  .  .  .  Lparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:11
+97  .  .  .  .  .  .  .  Ellipsis: -
+98  .  .  .  .  .  .  .  Rparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:12
+99  .  .  .  .  .  .  }
+100  .  .  .  .  .  }
+101  .  .  .  .  }
+102  .  .  .  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:2
+103  .  .  .  }
+104  .  .  }
+105  .  }
+106  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:22:1
+107  }
+
+
+
+WITH .
+
+
+ 0  *ast.BlockStmt {
+ 1  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:13:13
+ 2  .  List: []ast.Stmt (len = 3) {
+ 3  .  .  0: *ast.AssignStmt {
+ 4  .  .  .  Lhs: []ast.Expr (len = 1) {
+ 5  .  .  .  .  0: *ast.Ident {
+ 6  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:2
+ 7  .  .  .  .  .  Name: "globalData"
+ 8  .  .  .  .  .  Obj: *ast.Object {
+ 9  .  .  .  .  .  .  Kind: var
+10  .  .  .  .  .  .  Name: "globalData"
+11  .  .  .  .  .  .  Decl: *ast.ValueSpec {
+12  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+13  .  .  .  .  .  .  .  .  0: *ast.Ident {
+14  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:5
+15  .  .  .  .  .  .  .  .  .  Name: "globalData"
+16  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 8)
+17  .  .  .  .  .  .  .  .  }
+18  .  .  .  .  .  .  .  }
+19  .  .  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+20  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+21  .  .  .  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:18
+22  .  .  .  .  .  .  .  .  .  Kind: STRING
+23  .  .  .  .  .  .  .  .  .  Value: "\"some data\""
+24  .  .  .  .  .  .  .  .  }
+25  .  .  .  .  .  .  .  }
+26  .  .  .  .  .  .  }
+27  .  .  .  .  .  .  Data: 0
+28  .  .  .  .  .  }
+29  .  .  .  .  }
+30  .  .  .  }
+31  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:13
+32  .  .  .  Tok: =
+33  .  .  .  Rhs: []ast.Expr (len = 1) {
+34  .  .  .  .  0: *ast.Ident {
+35  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:15
+36  .  .  .  .  .  Name: "GlobalData"
+37  .  .  .  .  }
+38  .  .  .  }
+39  .  .  }
+40  .  .  1: *ast.IncDecStmt {
+41  .  .  .  X: *ast.Ident {
+42  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:17:2
+43  .  .  .  .  Name: "GlobalDataInt"
+44  .  .  .  }
+45  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:17:15
+46  .  .  .  Tok: ++
+47  .  .  }
+48  .  .  2: *ast.IfStmt {
+49  .  .  .  If: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:2
+50  .  .  .  Cond: *ast.BinaryExpr {
+51  .  .  .  .  X: *ast.Ident {
+52  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:5
+53  .  .  .  .  .  Name: "GlobalDataInt"
+54  .  .  .  .  }
+55  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:19
+56  .  .  .  .  Op: >
+57  .  .  .  .  Y: *ast.BasicLit {
+58  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:21
+59  .  .  .  .  .  Kind: INT
+60  .  .  .  .  .  Value: "0"
+61  .  .  .  .  }
+62  .  .  .  }
+63  .  .  .  Body: *ast.BlockStmt {
+64  .  .  .  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:19:23
+65  .  .  .  .  List: []ast.Stmt (len = 1) {
+66  .  .  .  .  .  0: *ast.ExprStmt {
+67  .  .  .  .  .  .  X: *ast.CallExpr {
+68  .  .  .  .  .  .  .  Fun: *ast.Ident {
+69  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:3
+70  .  .  .  .  .  .  .  .  Name: "Foo"
+71  .  .  .  .  .  .  .  }
+72  .  .  .  .  .  .  .  Lparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:6
+73  .  .  .  .  .  .  .  Ellipsis: -
+74  .  .  .  .  .  .  .  Rparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:7
+75  .  .  .  .  .  .  }
+76  .  .  .  .  .  }
+77  .  .  .  .  }
+78  .  .  .  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:2
+79  .  .  .  }
+80  .  .  }
+81  .  }
+82  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:22:1
+83  }
+
+
+WITH rename
+
+ 0  *ast.BlockStmt {
+ 1  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:14:13
+ 2  .  List: []ast.Stmt (len = 4) {
+ 3  .  .  0: *ast.AssignStmt {
+ 4  .  .  .  Lhs: []ast.Expr (len = 1) {
+ 5  .  .  .  .  0: *ast.Ident {
+ 6  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:15:2
+ 7  .  .  .  .  .  Name: "globalData"
+ 8  .  .  .  .  .  Obj: *ast.Object {
+ 9  .  .  .  .  .  .  Kind: var
+10  .  .  .  .  .  .  Name: "globalData"
+11  .  .  .  .  .  .  Decl: *ast.ValueSpec {
+12  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+13  .  .  .  .  .  .  .  .  0: *ast.Ident {
+14  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:5
+15  .  .  .  .  .  .  .  .  .  Name: "globalData"
+16  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 8)
+17  .  .  .  .  .  .  .  .  }
+18  .  .  .  .  .  .  .  }
+19  .  .  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+20  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+21  .  .  .  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:11:18
+22  .  .  .  .  .  .  .  .  .  Kind: STRING
+23  .  .  .  .  .  .  .  .  .  Value: "\"some data\""
+24  .  .  .  .  .  .  .  .  }
+25  .  .  .  .  .  .  .  }
+26  .  .  .  .  .  .  }
+27  .  .  .  .  .  .  Data: 0
+28  .  .  .  .  .  }
+29  .  .  .  .  }
+30  .  .  .  }
+31  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:15:13
+32  .  .  .  Tok: =
+33  .  .  .  Rhs: []ast.Expr (len = 1) {
+34  .  .  .  .  0: *ast.SelectorExpr {
+35  .  .  .  .  .  X: *ast.Ident {
+36  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:15:15
+37  .  .  .  .  .  .  Name: "pk"
+38  .  .  .  .  .  }
+39  .  .  .  .  .  Sel: *ast.Ident {
+40  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:15:18
+41  .  .  .  .  .  .  Name: "GlobalData"
+42  .  .  .  .  .  }
+43  .  .  .  .  }
+44  .  .  .  }
+45  .  .  }
+46  .  .  1: *ast.IncDecStmt {
+47  .  .  .  X: *ast.SelectorExpr {
+48  .  .  .  .  X: *ast.Ident {
+49  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:18:2
+50  .  .  .  .  .  Name: "pk"
+51  .  .  .  .  }
+52  .  .  .  .  Sel: *ast.Ident {
+53  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:18:5
+54  .  .  .  .  .  Name: "GlobalDataInt"
+55  .  .  .  .  }
+56  .  .  .  }
+57  .  .  .  TokPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:18:18
+58  .  .  .  Tok: ++
+59  .  .  }
+60  .  .  2: *ast.IfStmt {
+61  .  .  .  If: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:2
+62  .  .  .  Cond: *ast.BinaryExpr {
+63  .  .  .  .  X: *ast.BinaryExpr {
+64  .  .  .  .  .  X: *ast.SelectorExpr {
+65  .  .  .  .  .  .  X: *ast.Ident {
+66  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:5
+67  .  .  .  .  .  .  .  Name: "pk"
+68  .  .  .  .  .  .  }
+69  .  .  .  .  .  .  Sel: *ast.Ident {
+70  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:8
+71  .  .  .  .  .  .  .  Name: "GlobalDataInt"
+72  .  .  .  .  .  .  }
+73  .  .  .  .  .  }
+74  .  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:22
+75  .  .  .  .  .  Op: >
+76  .  .  .  .  .  Y: *ast.BasicLit {
+77  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:24
+78  .  .  .  .  .  .  Kind: INT
+79  .  .  .  .  .  .  Value: "0"
+80  .  .  .  .  .  }
+81  .  .  .  .  }
+82  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:26
+83  .  .  .  .  Op: ||
+84  .  .  .  .  Y: *ast.BinaryExpr {
+85  .  .  .  .  .  X: *ast.SelectorExpr {
+86  .  .  .  .  .  .  X: *ast.SelectorExpr {
+87  .  .  .  .  .  .  .  X: *ast.Ident {
+88  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:29
+89  .  .  .  .  .  .  .  .  Name: "pk"
+90  .  .  .  .  .  .  .  }
+91  .  .  .  .  .  .  .  Sel: *ast.Ident {
+92  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:32
+93  .  .  .  .  .  .  .  .  Name: "GlobalStruct"
+94  .  .  .  .  .  .  .  }
+95  .  .  .  .  .  .  }
+96  .  .  .  .  .  .  Sel: *ast.Ident {
+97  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:45
+98  .  .  .  .  .  .  .  Name: "BooVal"
+99  .  .  .  .  .  .  }
+100  .  .  .  .  .  }
+101  .  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:52
+102  .  .  .  .  .  Op: <
+103  .  .  .  .  .  Y: *ast.BasicLit {
+104  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:54
+105  .  .  .  .  .  .  Kind: INT
+106  .  .  .  .  .  .  Value: "0"
+107  .  .  .  .  .  }
+108  .  .  .  .  }
+109  .  .  .  }
+110  .  .  .  Body: *ast.BlockStmt {
+111  .  .  .  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:20:56
+112  .  .  .  .  List: []ast.Stmt (len = 1) {
+113  .  .  .  .  .  0: *ast.ExprStmt {
+114  .  .  .  .  .  .  X: *ast.CallExpr {
+115  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+116  .  .  .  .  .  .  .  .  X: *ast.Ident {
+117  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:3
+118  .  .  .  .  .  .  .  .  .  Name: "pk"
+119  .  .  .  .  .  .  .  .  }
+120  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+121  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:6
+122  .  .  .  .  .  .  .  .  .  Name: "Foo"
+123  .  .  .  .  .  .  .  .  }
+124  .  .  .  .  .  .  .  }
+125  .  .  .  .  .  .  .  Lparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:9
+126  .  .  .  .  .  .  .  Ellipsis: -
+127  .  .  .  .  .  .  .  Rparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:21:10
+128  .  .  .  .  .  .  }
+129  .  .  .  .  .  }
+130  .  .  .  .  }
+131  .  .  .  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:22:2
+132  .  .  .  }
+133  .  .  }
+134  .  .  3: *ast.IfStmt {
+135  .  .  .  If: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:2
+136  .  .  .  Cond: *ast.BinaryExpr {
+137  .  .  .  .  X: *ast.BinaryExpr {
+138  .  .  .  .  .  X: *ast.SelectorExpr {
+139  .  .  .  .  .  .  X: *ast.SelectorExpr {
+140  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+141  .  .  .  .  .  .  .  .  X: *ast.Ident {
+142  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:5
+143  .  .  .  .  .  .  .  .  .  Name: "pk"
+144  .  .  .  .  .  .  .  .  }
+145  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+146  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:8
+147  .  .  .  .  .  .  .  .  .  Name: "GlobalDeepStruct"
+148  .  .  .  .  .  .  .  .  }
+149  .  .  .  .  .  .  .  }
+150  .  .  .  .  .  .  .  Sel: *ast.Ident {
+151  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:25
+152  .  .  .  .  .  .  .  .  Name: "BooStruct"
+153  .  .  .  .  .  .  .  }
+154  .  .  .  .  .  .  }
+155  .  .  .  .  .  .  Sel: *ast.Ident {
+156  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:35
+157  .  .  .  .  .  .  .  Name: "BooVal"
+158  .  .  .  .  .  .  }
+159  .  .  .  .  .  }
+160  .  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:42
+161  .  .  .  .  .  Op: !=
+162  .  .  .  .  .  Y: *ast.BasicLit {
+163  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:45
+164  .  .  .  .  .  .  Kind: INT
+165  .  .  .  .  .  .  Value: "42"
+166  .  .  .  .  .  }
+167  .  .  .  .  }
+168  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:48
+169  .  .  .  .  Op: &&
+170  .  .  .  .  Y: *ast.UnaryExpr {
+171  .  .  .  .  .  OpPos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:51
+172  .  .  .  .  .  Op: !
+173  .  .  .  .  .  X: *ast.Ident {
+174  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:52
+175  .  .  .  .  .  .  Name: "BooVal"
+176  .  .  .  .  .  .  Obj: *ast.Object {
+177  .  .  .  .  .  .  .  Kind: var
+178  .  .  .  .  .  .  .  Name: "BooVal"
+179  .  .  .  .  .  .  .  Decl: *ast.ValueSpec {
+180  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+181  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+182  .  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:12:5
+183  .  .  .  .  .  .  .  .  .  .  Name: "BooVal"
+184  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 176)
+185  .  .  .  .  .  .  .  .  .  }
+186  .  .  .  .  .  .  .  .  }
+187  .  .  .  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+188  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+189  .  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:12:14
+190  .  .  .  .  .  .  .  .  .  .  Name: "false"
+191  .  .  .  .  .  .  .  .  .  }
+192  .  .  .  .  .  .  .  .  }
+193  .  .  .  .  .  .  .  }
+194  .  .  .  .  .  .  .  Data: 0
+195  .  .  .  .  .  .  }
+196  .  .  .  .  .  }
+197  .  .  .  .  }
+198  .  .  .  }
+199  .  .  .  Body: *ast.BlockStmt {
+200  .  .  .  .  Lbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:24:59
+201  .  .  .  .  List: []ast.Stmt (len = 1) {
+202  .  .  .  .  .  0: *ast.ExprStmt {
+203  .  .  .  .  .  .  X: *ast.CallExpr {
+204  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+205  .  .  .  .  .  .  .  .  X: *ast.Ident {
+206  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:25:3
+207  .  .  .  .  .  .  .  .  .  Name: "fmt"
+208  .  .  .  .  .  .  .  .  }
+209  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+210  .  .  .  .  .  .  .  .  .  NamePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:25:7
+211  .  .  .  .  .  .  .  .  .  Name: "Println"
+212  .  .  .  .  .  .  .  .  }
+213  .  .  .  .  .  .  .  }
+214  .  .  .  .  .  .  .  Lparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:25:14
+215  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+216  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+217  .  .  .  .  .  .  .  .  .  ValuePos: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:25:15
+218  .  .  .  .  .  .  .  .  .  Kind: STRING
+219  .  .  .  .  .  .  .  .  .  Value: "\"foo\""
+220  .  .  .  .  .  .  .  .  }
+221  .  .  .  .  .  .  .  }
+222  .  .  .  .  .  .  .  Ellipsis: -
+223  .  .  .  .  .  .  .  Rparen: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:25:20
+224  .  .  .  .  .  .  }
+225  .  .  .  .  .  }
+226  .  .  .  .  }
+227  .  .  .  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:26:2
+228  .  .  .  }
+229  .  .  }
+230  .  }
+231  .  Rbrace: /Users/stavona/projects/go-root/src/github.com/astavonin/lintinit/test_data/pkg2/ext_deps.go:27:1
+232  }
+
