@@ -79,6 +79,6 @@ func Test_LinterBaseCases(t *testing.T) {
 		lintErrs, err := l.Parse()
 		So(err, ShouldBeNil)
 
-		So(lintErrs, ShouldHaveLength, 2)
+		So(lintErrs, ShouldHaveLength, 7)
 	})
 }

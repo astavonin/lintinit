@@ -80,9 +80,27 @@ func (i *Ident) FullName() string {
 	return strings.Join(i.Path, ".")
 }
 
+type LineInfo struct {
+	File   string
+	Line   int
+	Column int
+}
+
+func (li LineInfo) String() string {
+	return fmt.Sprintf("LineInfo(%s:%d:%d)", li.File, li.Line, li.Column)
+}
+
+func NewLineInfo(position token.Position) LineInfo {
+	return LineInfo{File: position.Filename, Line: position.Line, Column: position.Column}
+}
+
 type LintError struct {
-	line    string
-	comment string
+	Line  LineInfo
+	Ident string
+}
+
+func (le LintError) String() string {
+	return fmt.Sprintf("LintError(Ident=%s, Line=%s)", le.Ident, le.Line)
 }
 
 type Linter interface {
@@ -244,8 +262,8 @@ func (l *linter) Parse() ([]LintError, error) {
 	//fmt.Println("Imports:", l.imports)
 	//fmt.Println("Identifiers:", l.idents)
 	//
-	//for _, ident := range l.idents {
-	//	fmt.Println("ID:", ident.PkgName())
+	//for _, Ident := range l.idents {
+	//	fmt.Println("ID:", Ident.PkgName())
 	//}
 
 	//fmt.Println("Pkg imports:", pkg.Imports())
@@ -259,11 +277,11 @@ func (l *linter) Parse() ([]LintError, error) {
 		}
 		pkg, ok := l.imports[ident.PkgName()]
 		if !ok {
-			log.Fatal(fmt.Sprintf("unknown ident %s", ident))
+			log.Fatal(fmt.Sprintf("unknown Ident %s", ident))
 		}
 		if pkg.IsInternal() && !pkg.IsChildFor(l.root) {
 			lintErr = append(lintErr, LintError{
-				ident.position.String(),
+				NewLineInfo(ident.position),
 				ident.FullName()})
 		}
 	}

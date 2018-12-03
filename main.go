@@ -1,18 +1,57 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 )
 
-func main() {
-	l := NewLinter(os.Args[1], nil)
-	fmt.Println(l.Parse())
+func processFolder(root string) ([]LintError, error) {
+	var (
+		lintErrs []LintError
+		err      error
+	)
+	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			return nil
+		}
+		l := NewLinter(path, nil)
+		pkgErrs, err := l.Parse()
+		if err != nil {
+			return err
+		}
+		lintErrs = append(lintErrs, pkgErrs...)
+		return nil
+	})
+
+	return lintErrs, err
 }
 
-// https://github.com/golang/go/blob/master/src/cmd/vet/unused.go
-// https://github.com/golang/example/tree/master/gotypes
-// https://stackoverflow.com/questions/32532335/usage-of-go-parser-across-packages
-// https://arslan.io/2017/09/14/the-ultimate-guide-to-writing-a-go-tool/
-// https://stackoverflow.com/questions/50524607/go-lang-func-parameter-type
-//
+func printErrors(errors []LintError) {
+	for _, err := range errors {
+		fmt.Printf("%s:%d:%d: global resource %s access from from package init() call\n",
+			err.Line.File, err.Line.Line, err.Line.Column, err.Ident)
+	}
+}
+
+func usage() {
+	fmt.Fprintf(os.Stderr, "Usage of lintinit:\n")
+	fmt.Fprintf(os.Stderr, "\tlintinit [directory] # runs on package in current or [directory] recursively\n")
+	flag.PrintDefaults()
+}
+
+func main() {
+	//flag.Usage = usage
+	//flag.Parse()
+
+	root := "."
+
+	le, err := processFolder(root)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	printErrors(le)
+}
