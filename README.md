@@ -1,10 +1,20 @@
+External resources access from `init()` function may have negative side-effects like cross components initialization dependency and other initialization order issues.
 
+For example, there is a components tree like this:
+```
+- pkg1
+- pkg2
+  + pkg3
+```
 
-# Useful resource
+`lintinit` will report `pkg1` usages (global variables or function calls) from `pk2` `init()` function but allow to use everything from `pkg3`.
 
-https://github.com/golang/go/blob/master/src/cmd/vet/unused.go
-https://github.com/golang/example/tree/master/gotypes
-https://stackoverflow.com/questions/32532335/usage-of-go-parser-across-packages
-https://arslan.io/2017/09/14/the-ultimate-guide-to-writing-a-go-tool/
-https://stackoverflow.com/questions/50524607/go-lang-func-parameter-type
-https://github.com/golang/lint/blob/master/golint/golint.go
+# Installing
+
+```bash
+go get -u github.com/astavonin/lintinit
+```
+
+# How to run
+
+`intinit [directories]` - runs on package in current directory or `directories` recursively.

@@ -39,7 +39,7 @@ func printErrors(errors []LintError) {
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage of lintinit:\n")
-	fmt.Fprintf(os.Stderr, "\tlintinit [directories] # runs on package in current or [directories] recursively\n")
+	fmt.Fprintf(os.Stderr, "\tlintinit [directories] # runs on package in current directory or [directories] recursively\n")
 	flag.PrintDefaults()
 }
 

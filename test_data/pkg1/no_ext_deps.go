@@ -17,6 +17,7 @@ var GlobalDeepStruct = DeepBoo{Boo{42}}
 
 func init() {
 	GlobalData = "new data"
+	Foo()
 }
 
 func Foo() {

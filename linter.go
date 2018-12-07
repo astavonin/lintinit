@@ -55,14 +55,15 @@ func (p *Package) IsInternal() bool {
 type Ident struct {
 	Path     []string
 	position token.Position
+	IsFn     bool
 }
 
 func (i *Ident) String() string {
-	return "Ident(" + strings.Join(i.Path, ".") + ", " + i.position.String() + ")"
+	return fmt.Sprintf("Ident(%s, %s, %t)", strings.Join(i.Path, "."), i.position.String(), i.IsFn)
 }
 
-func NewIdent(names []string, position token.Position) *Ident {
-	return &Ident{names, position}
+func NewIdent(names []string, position token.Position, isFn bool) *Ident {
+	return &Ident{names, position, isFn}
 }
 
 func (i *Ident) PkgName() string {
@@ -77,7 +78,11 @@ func (i *Ident) Name() string {
 }
 
 func (i *Ident) FullName() string {
-	return strings.Join(i.Path, ".")
+	var end string
+	if i.IsFn {
+		end = "()"
+	}
+	return fmt.Sprintf("%s%s", strings.Join(i.Path, "."), end)
 }
 
 type LineInfo struct {
@@ -230,6 +235,18 @@ func collectFromIdents(ident *ast.Ident) []string {
 	return []string{ident.Name}
 }
 
+func collectFromCall(sel *ast.CallExpr) (res []string, pos token.Pos) {
+	switch t := sel.Fun.(type) {
+	case *ast.SelectorExpr:
+		res, pos = collectFromSelectors(t)
+	case *ast.Ident:
+		res = collectFromIdents(t)
+		pos = t.NamePos
+	}
+
+	return
+}
+
 func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
 	var acc []*Ident
 	ast.Inspect(decl, func(n ast.Node) bool {
@@ -237,10 +254,14 @@ func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
 		switch t := n.(type) {
 		case *ast.SelectorExpr:
 			res, pos := collectFromSelectors(t)
-			acc = append(acc, NewIdent(res, fset.Position(pos)))
+			acc = append(acc, NewIdent(res, fset.Position(pos), false))
 			deeper = false
 		case *ast.Ident:
-			acc = append(acc, NewIdent(collectFromIdents(t), fset.Position(t.NamePos)))
+			acc = append(acc, NewIdent(collectFromIdents(t), fset.Position(t.NamePos), false))
+			deeper = false
+		case *ast.CallExpr:
+			res, pos := collectFromCall(t)
+			acc = append(acc, NewIdent(res, fset.Position(pos), true))
 			deeper = false
 		}
 		return deeper
