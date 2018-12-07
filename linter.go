@@ -249,10 +249,16 @@ func collectFromCall(sel *ast.CallExpr) (res []string, pos token.Pos) {
 
 func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
 	var acc []*Ident
+	fnBegin := false
 	ast.Inspect(decl, func(n ast.Node) bool {
 		deeper := true
 		switch t := n.(type) {
 		case *ast.SelectorExpr:
+			if fnBegin {
+				// in this case SelectorExpr == CallExpr which is stored already
+				fnBegin = false
+				break
+			}
 			res, pos := collectFromSelectors(t)
 			acc = append(acc, NewIdent(res, fset.Position(pos), false))
 			deeper = false
@@ -262,7 +268,7 @@ func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
 		case *ast.CallExpr:
 			res, pos := collectFromCall(t)
 			acc = append(acc, NewIdent(res, fset.Position(pos), true))
-			deeper = false
+			fnBegin = true
 		}
 		return deeper
 	})
