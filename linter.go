@@ -144,8 +144,12 @@ func (l *linter) buildFilesList() error {
 
 	pkg, err := ctx.ImportDir(l.dir, 0)
 	if err != nil {
+		if _, nogo := err.(*build.NoGoError); nogo {
+			return nil
+		}
 		return fmt.Errorf("cannot process directory %s: %s", l.dir, err)
 	}
+
 	var files []string
 	files = append(files, pkg.GoFiles...)
 	files = append(files, pkg.CgoFiles...)
@@ -158,6 +162,10 @@ func (l *linter) buildFilesList() error {
 
 func (l *linter) parse() (*types.Package, error) {
 
+	if len(l.files) <= 0 {
+		return nil, nil
+	}
+
 	fset := token.NewFileSet()
 	var astFiles []*ast.File
 
@@ -167,9 +175,6 @@ func (l *linter) parse() (*types.Package, error) {
 			log.Fatalf("parsing error: %s, %s", fname, err)
 		}
 		astFiles = append(astFiles, f)
-
-		//fmt.Println("AAAA:", f.Name.String())
-		//ast.Print(fset, f)
 
 		ast.Inspect(f, func(n ast.Node) bool {
 			switch t := n.(type) {
@@ -226,7 +231,6 @@ func collectFromIdents(ident *ast.Ident) []string {
 }
 
 func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
-	//ast.Print(fset, decl)
 	var acc []*Ident
 	ast.Inspect(decl, func(n ast.Node) bool {
 		deeper := true
@@ -256,18 +260,6 @@ func (l *linter) Parse() ([]LintError, error) {
 	if err != nil {
 		return nil, err
 	}
-	//
-	//fmt.Println("Parse:", l.root)
-	//
-	//fmt.Println("Imports:", l.imports)
-	//fmt.Println("Identifiers:", l.idents)
-	//
-	//for _, Ident := range l.idents {
-	//	fmt.Println("ID:", Ident.PkgName())
-	//}
-
-	//fmt.Println("Pkg imports:", pkg.Imports())
-	//fmt.Println("Lookup:", pkg.Scope().Lookup("BooVal"))
 
 	var lintErr []LintError
 	for _, ident := range l.idents {

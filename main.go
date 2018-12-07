@@ -20,9 +20,10 @@ func processFolder(root string) ([]LintError, error) {
 		l := NewLinter(path, nil)
 		pkgErrs, err := l.Parse()
 		if err != nil {
-			return err
+			log.Println(err)
+		} else {
+			lintErrs = append(lintErrs, pkgErrs...)
 		}
-		lintErrs = append(lintErrs, pkgErrs...)
 		return nil
 	})
 
@@ -38,20 +39,36 @@ func printErrors(errors []LintError) {
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage of lintinit:\n")
-	fmt.Fprintf(os.Stderr, "\tlintinit [directory] # runs on package in current or [directory] recursively\n")
+	fmt.Fprintf(os.Stderr, "\tlintinit [directories] # runs on package in current or [directories] recursively\n")
 	flag.PrintDefaults()
 }
 
+func isDir(filename string) bool {
+	fi, err := os.Stat(filename)
+	return err == nil && fi.IsDir()
+}
+
 func main() {
-	//flag.Usage = usage
-	//flag.Parse()
+	flag.Usage = usage
+	flag.Parse()
 
-	root := "."
+	var folders []string
 
-	le, err := processFolder(root)
-	if err != nil {
-		log.Fatal(err)
+	if flag.NArg() == 0 {
+		folders = append(folders, ".")
+	} else {
+		for _, arg := range flag.Args() {
+			if isDir(arg) {
+				folders = append(folders, arg)
+			}
+		}
 	}
 
-	printErrors(le)
+	for _, folder := range folders {
+		le, err := processFolder(folder)
+		if err != nil {
+			log.Fatal(err)
+		}
+		printErrors(le)
+	}
 }
