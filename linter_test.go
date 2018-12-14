@@ -40,7 +40,7 @@ func Test_Package(t *testing.T) {
 
 func Test_Idents(t *testing.T) {
 	Convey("Package should detect ", t, func() {
-		ident := NewIdent([]string{"sub", "child_name"}, token.Position{})
+		ident := NewIdent([]string{"sub", "child_name"}, nil, token.Position{}, false)
 
 		So(ident.FullName(), ShouldEqual, "sub.child_name")
 		So(ident.Name(), ShouldEqual, "child_name")
@@ -79,6 +79,6 @@ func Test_LinterBaseCases(t *testing.T) {
 		lintErrs, err := l.Parse()
 		So(err, ShouldBeNil)
 
-		So(lintErrs, ShouldHaveLength, 7)
+		So(lintErrs, ShouldHaveLength, 10)
 	})
 }

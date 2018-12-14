@@ -54,6 +54,7 @@ func (p *Package) IsInternal() bool {
 
 type Ident struct {
 	Path     []string
+	TypeName []string
 	position token.Position
 	IsFn     bool
 }
@@ -62,11 +63,14 @@ func (i *Ident) String() string {
 	return fmt.Sprintf("Ident(%s, %s, %t)", strings.Join(i.Path, "."), i.position.String(), i.IsFn)
 }
 
-func NewIdent(names []string, position token.Position, isFn bool) *Ident {
-	return &Ident{names, position, isFn}
+func NewIdent(names []string, typeName []string, position token.Position, isFn bool) *Ident {
+	return &Ident{names, typeName, position, isFn}
 }
 
 func (i *Ident) PkgName() string {
+	if i.TypeName != nil && len(i.TypeName) > 0 {
+		return i.TypeName[0]
+	}
 	if len(i.Path) <= 1 {
 		return "."
 	}
@@ -179,6 +183,7 @@ func (l *linter) parse() (*types.Package, error) {
 		if err != nil {
 			log.Fatalf("parsing error: %s, %s", fname, err)
 		}
+
 		astFiles = append(astFiles, f)
 
 		ast.Inspect(f, func(n ast.Node) bool {
@@ -218,13 +223,29 @@ func parseImport(spec *ast.ImportSpec) *Package {
 	return ParsePackage(spec.Path.Value, importName)
 }
 
-func collectFromSelectors(sel *ast.SelectorExpr) (res []string, pos token.Pos) {
+func getTypeInfo(obj *ast.Object) (res []string, pos token.Pos) {
+	vs, ok := obj.Decl.(*ast.ValueSpec)
+	if ok {
+		t, ok := vs.Type.(*ast.SelectorExpr)
+		if ok {
+			res, _, pos = collectFromSelectors(t)
+			return
+		}
+	}
+	return nil, -1
+}
+
+func collectFromSelectors(sel *ast.SelectorExpr) (res []string, typeName []string, pos token.Pos) {
 	switch t := sel.X.(type) {
 	case *ast.SelectorExpr:
-		r, p := collectFromSelectors(t)
+		r, tn, p := collectFromSelectors(t)
 		res = append(r, sel.Sel.Name)
 		pos = p
+		typeName = tn
 	case *ast.Ident:
+		if t.Obj != nil { // is it Object?
+			typeName, _ = getTypeInfo(t.Obj)
+		}
 		res = append(res, t.Name, sel.Sel.Name)
 		pos = sel.Sel.NamePos
 	}
@@ -235,10 +256,10 @@ func collectFromIdents(ident *ast.Ident) []string {
 	return []string{ident.Name}
 }
 
-func collectFromCall(sel *ast.CallExpr) (res []string, pos token.Pos) {
+func collectFromCall(sel *ast.CallExpr) (res []string, typeName []string, pos token.Pos) {
 	switch t := sel.Fun.(type) {
 	case *ast.SelectorExpr:
-		res, pos = collectFromSelectors(t)
+		res, typeName, pos = collectFromSelectors(t)
 	case *ast.Ident:
 		res = collectFromIdents(t)
 		pos = t.NamePos
@@ -259,15 +280,15 @@ func processInit(fset *token.FileSet, decl *ast.BlockStmt) []*Ident {
 				fnBegin = false
 				break
 			}
-			res, pos := collectFromSelectors(t)
-			acc = append(acc, NewIdent(res, fset.Position(pos), false))
+			res, typeName, pos := collectFromSelectors(t)
+			acc = append(acc, NewIdent(res, typeName, fset.Position(pos), false))
 			deeper = false
 		case *ast.Ident:
-			acc = append(acc, NewIdent(collectFromIdents(t), fset.Position(t.NamePos), false))
+			acc = append(acc, NewIdent(collectFromIdents(t), nil, fset.Position(t.NamePos), false))
 			deeper = false
 		case *ast.CallExpr:
-			res, pos := collectFromCall(t)
-			acc = append(acc, NewIdent(res, fset.Position(pos), true))
+			res, typeName, pos := collectFromCall(t)
+			acc = append(acc, NewIdent(res, typeName, fset.Position(pos), true))
 			fnBegin = true
 		}
 		return deeper
@@ -296,7 +317,8 @@ func (l *linter) Parse() ([]LintError, error) {
 		}
 		pkg, ok := l.imports[ident.PkgName()]
 		if !ok {
-			log.Fatal(fmt.Sprintf("unknown Ident %s", ident))
+			//log.Println(fmt.Sprintf("unknown %s", ident))
+			continue
 		}
 		if pkg.IsInternal() && !pkg.IsChildFor(l.root) {
 			lintErr = append(lintErr, LintError{
